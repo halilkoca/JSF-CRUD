@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Veri tabanından kayıt güncelle</title>
+    </h:head>
+    <h:body>
+        <f:view>
+            <h:form>
+                <h:outputStylesheet library="css" name="style.css"/>
+                <h:dataTable value="#{kayitCek.sorguSonucu}" var="kayitCekObjesi" styleClass="order-table"
+                             headerClass="order-table-header"
+                             rowClasses="order-table-odd-row, order-table-even-row">
+                    <h:column>
+                        <f:facet name="header">
+                            Adı
+                        </f:facet>
+                        <h:outputText value="#{kayitCekObjesi.isim}" rendered="#{!kayitCekObjesi.guncellenebilirlik}"/>
+                        <h:inputText value="#{kayitCekObjesi.isim}" rendered="#{kayitCekObjesi.guncellenebilirlik}"/>
+                    </h:column>
+                
+                    <h:column>
+                        <f:facet name="header">
+                            Soyadı
+                        </f:facet>
+                        <h:outputText value="#{kayitCekObjesi.soyisim}" rendered="#{!kayitCekObjesi.guncellenebilirlik}"/>
+                        <h:inputText value="#{kayitCekObjesi.soyisim}" rendered="#{kayitCekObjesi.guncellenebilirlik}"/>
+                    </h:column>
+                    
+                    <h:column>
+                        <f:facet name="header">
+                            Üniversite
+                        </f:facet>
+                        <h:outputText value="#{kayitCekObjesi.universite}" rendered="#{!kayitCekObjesi.guncellenebilirlik}"/>
+                        <h:inputText value="#{kayitCekObjesi.universite}" rendered="#{kayitCekObjesi.guncellenebilirlik}"/>
+                    </h:column>
+                    
+                    <h:column>
+                        <f:facet name="header">
+                            Güncelle
+                        </f:facet>
+                        <h:commandButton value="Güncellemeyi Aç" action="#{kayitGuncelle.gorunurluguDegistir(kayitCekObjesi)}" rendered="#{!kayitCekObjesi.guncellenebilirlik}"/>
+                        <h:commandButton value="Kaydet" action="#{kayitGuncelle.kaydiGuncelle(kayitCekObjesi)}" rendered="#{kayitCekObjesi.guncellenebilirlik}"/>
+                    </h:column>
+
+                </h:dataTable>
+                <h:outputText value="#{kayitGuncelle.guncellemeMesaji}"/>
+                
+            </h:form>
+        </f:view>
+
+    </h:body>
+</html>
+
